@@ -1,8 +1,5 @@
 #include "Room.h"
 #include <iostream>
-#include <map>
-#include <iomanip>
-#include <sstream>
 
 const std::map<RoomType, std::pair<std::string, double>> roomTypeInfo = {
     {RoomType::SINGLE, {"单人间", 100.0}},
@@ -10,19 +7,23 @@ const std::map<RoomType, std::pair<std::string, double>> roomTypeInfo = {
     {RoomType::FAMILY, {"家庭房", 300.0}},
     {RoomType::PRESIDENTIAL_SUITE, {"总统套房", 500.0}}
 };
-Room::Room(){}
+
+Room::Room()
+    : id(0), type(RoomType::SINGLE), price(0.0), isOccupied(false) {}
+
 Room::Room(int id, RoomType type, double price)
     : id(id), type(type), price(price), isOccupied(false) {}
 
 int Room::getId() const { return id; }
 RoomType Room::getType() const { return type; }
+double Room::getPrice() const { return price; }
+bool Room::getIsOccupied() const { return isOccupied; }
+
 void Room::setType(RoomType type) {
     this->type = type;
     this->price = roomTypeInfo.at(type).second; // 根据类型更新价格
 }
-double Room::getPrice() const { return price; }
 void Room::setPrice(double price) { this->price = price; }
-bool Room::getIsOccupied() const { return isOccupied; }
 void Room::setIsOccupied(bool occupied) { isOccupied = occupied; }
 
 void Room::show() const {
